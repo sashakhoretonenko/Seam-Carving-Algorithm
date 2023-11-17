@@ -1,6 +1,5 @@
 import edu.princeton.cs.algs4.IndexMinPQ;
 import edu.princeton.cs.algs4.Picture;
-import edu.princeton.cs.algs4.StdOut;
 
 // finds optimal seams in images
 public class SeamCarver {
@@ -353,21 +352,23 @@ public class SeamCarver {
 
     //  unit testing (required)
     public static void main(String[] args) {
-        Picture pic = new Picture("chameleon.png");
+        Picture pic = new Picture(args[0]);
+        int hRemove = Integer.parseInt(args[1]);
+        int vRemove = Integer.parseInt(args[2]);
 
         SeamCarver s = new SeamCarver(pic);
 
-        StdOut.println(s.width());
-        StdOut.println(s.height());
-        StdOut.println(s.energy(69, 69));
 
-
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < hRemove; i++) {
             int[] hSeam = s.findHorizontalSeam();
             s.removeHorizontalSeam(hSeam);
+        }
+
+        for (int i = 0; i < vRemove; i++) {
             int[] vSeam = s.findVerticalSeam();
             s.removeVerticalSeam(vSeam);
         }
+
         Picture p = s.picture();
         p.show();
     }
